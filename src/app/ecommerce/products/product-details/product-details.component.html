@@ -1,1 +1,46 @@
-<p>product-details works!</p>
+<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+    <div class="offcanvas-header">
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+        <figure>
+            <img class="w-100" src="domino-studio-164_6wVEHfI-unsplash.jpg" alt="shoes">
+        </figure>
+        <h4 class="offcanvas-title">{{currentProduct?.productName}}</h4>
+        <h5 class="offcanvas-title">{{currentProduct?.brand}}</h5>
+        <p class="my-1 text-secondary">{{currentProduct?.description}}</p>
+        @if(currentProduct?.discount){
+            <p class="my-3">Price is<span class="text-bg-danger p-2 text-decoration-line-through rounded-2 mx-2">{{currentProduct?.price}}$</span> <span class="text-bg-success p-2 rounded-2 mx-1">{{(currentProduct?.price - (currentProduct?.price * currentProduct?.discount))}}$</span> ( after discount )</p>
+        } @else {
+            <p class="my-3">Price is<span class="text-bg-success p-2 rounded-2 mx-2">{{currentProduct?.price}}$</span></p>
+        }
+        <div>
+            @for (color of currentProduct?.color; track $index) {
+                <span [style]="{'background-color': color}" class="colors"></span>
+            }
+        </div>
+        <div class="my-3">Size : 
+            @for (size of currentProduct?.size; track $index) {
+                @if(currentProduct?.size.length != ($index + 1)){
+                    <span class="fw-bold text-secondary-emphasis">{{size}} - </span>
+                } @else {
+                    <span class="fw-bold text-secondary-emphasis">{{size}}</span>
+                }
+            }
+        </div>
+        <p>
+            @if (currentProduct?.stock) {
+                <span class="fw-bold text-bg-primary p-2 rounded-1">{{currentProduct?.stock}}</span> Piece Is Available
+            } @else {
+                <span>Not Available Now</span>
+            }
+        </p>
+        <div>
+            @if(currentProduct?.stock){
+                <button class="btn btn-outline-success" (click)="addToCart(currentProduct)">Add to Cart</button>
+            } @else {
+                <button class="btn btn-outline-secondary" (click)="notifyMe(currentProduct)">Notify Me</button>
+            }
+        </div>
+    </div>
+  </div>

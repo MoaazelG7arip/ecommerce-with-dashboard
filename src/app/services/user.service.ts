@@ -8,6 +8,11 @@ import { BehaviorSubject } from 'rxjs';
 export class UserService {
 
   private users: UserModel[];
+  private admins: UserModel[] = [
+    {firstName: 'John', lastName: 'Doe', email: 'johndoe@example.com', password: 'password123'},
+    {firstName: 'Jane', lastName: 'Smith', email: 'janesmith@example.com', password: 'password456'}
+  ];
+  private currentUserEmail: string;
 
   loggedIn = new BehaviorSubject<boolean>(false);
 
@@ -15,6 +20,7 @@ export class UserService {
   constructor() {
     let storageUser = localStorage.getItem('users');
     let storageLoggedIn = localStorage.getItem('loggedIn');
+    let storageEmail = localStorage.getItem('currentUserEmail');
     if (storageUser) {
       this.users = JSON.parse(storageUser);
     } else {
@@ -22,10 +28,14 @@ export class UserService {
     }
 
     if (storageLoggedIn) {
-      console.log('logged previously')
       this.loggedIn.next(JSON.parse(storageLoggedIn))
     } else {
       this.loggedIn.next(false);
+    }
+    if(storageEmail){
+      this.currentUserEmail = JSON.parse(storageEmail)
+    } else {
+      this.currentUserEmail = null;
     }
 
   }
@@ -37,6 +47,8 @@ export class UserService {
     this.loggedIn.subscribe((value)=>{
       localStorage.setItem('loggedIn', JSON.stringify(value));
     })
+    this.currentUserEmail =user.email;
+    localStorage.setItem('currentUserEmail', JSON.stringify(this.currentUserEmail));
   }
 
   checkUser(email:string, password: string) :boolean {
@@ -51,15 +63,35 @@ export class UserService {
         return;
       }
     });
+    if(checked){
+      this.currentUserEmail = email;
+      localStorage.setItem('currentUserEmail', JSON.stringify(this.currentUserEmail)); 
+    }
+    return checked;
+  }
+
+  checkAdmin(email: string, password: string){
+    let checked = false;
+    this.admins.forEach(admin => {
+      if(admin.email === email && admin.password === password){
+        checked = true;
+        console.log('true admin');
+        return;
+      }
+    });
     return checked;
   }
 
   logOut() {
     this.loggedIn.next(false);
     localStorage.setItem('loggedIn', JSON.stringify(false));
+    localStorage.removeItem('currentUserEmail');
   }
 
   getUser(){
     return this.users;
+  }
+  getCurrentUserEmail(){
+    return this.currentUserEmail;
   }
 }

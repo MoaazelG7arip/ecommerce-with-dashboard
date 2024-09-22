@@ -2,12 +2,12 @@ import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { UserService } from '../../services/user.service';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-sign-in',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule,RouterLink],
   templateUrl: './sign-in.component.html',
   styleUrl: './sign-in.component.css'
 })
@@ -23,7 +23,8 @@ export class SignInComponent {
   ngOnInit(){
     this.loginForm = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.email]),
-      password: new FormControl('', [Validators.required, Validators.minLength(6)])
+      password: new FormControl('', [Validators.required, Validators.minLength(6)]),
+      role: new FormControl('user', [Validators.required])
     });
   }
 
@@ -38,13 +39,20 @@ export class SignInComponent {
     if (this.loginForm.invalid) {
       return;
     }
-
-    // Otherwise, process the form (for now just log the values)
-    if(this.userService.checkUser(this.loginForm.value.email, this.loginForm.value.password)){
-      alert('Welcome, you have successfully logged in');
-      this.router.navigate(['/ecommerce/products']);
-    } else {
-      alert('Wrong email or password')
+    if(this.f['role'].value == 'user'){
+      if(this.userService.checkUser(this.loginForm.value.email, this.loginForm.value.password)){
+        alert('Welcome, you have successfully logged in');
+        this.router.navigate(['/ecommerce/products']);
+      } else {
+        alert('Wrong email or password')
+      }
+    } else if(this.f['role'].value == 'admin'){
+      if(this.userService.checkAdmin(this.loginForm.value.email, this.loginForm.value.password)){
+        alert('Welcome, you have successfully logged in as an admin');
+        this.router.navigate(['/dashboard']);
+      } else {
+        alert('Wrong email or password')
+      }
     }
 
   }

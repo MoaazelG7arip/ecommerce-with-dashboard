@@ -1,0 +1,9 @@
+.card span{
+    position: absolute;
+    top:1.3rem;
+    right: 0rem;
+    padding: .8rem 1.7rem;
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+

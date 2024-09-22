@@ -13,9 +13,9 @@ export class HeaderComponent {
 
   userService: UserService = inject(UserService);
   router:Router = inject(Router);
-  log: boolean = false;
-  ngOnInit(): void {
+  log: boolean;
 
+  ngOnInit(): void {
     this.userService.loggedIn.subscribe((data)=>{
       this.log = data;
     })

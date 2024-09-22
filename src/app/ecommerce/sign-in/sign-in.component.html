@@ -7,6 +7,13 @@
   
             <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
               <div class="mb-3">
+                <label for="role" class="form-label">Role</label>
+                <select formControlName="role" class="form-select">
+                  <option value="user">User</option>
+                  <option value="admin">Admin</option> 
+                </select>
+              </div>
+              <div class="mb-3">
                 <label for="email" class="form-label">Email</label>
                 <input
                   type="email"
@@ -40,6 +47,7 @@
             </form>
           </div>
         </div>
+        <a routerLink="/ecommerce/register">You Don't Have Account? Register Now!</a>
       </div>
     </div>
   </div>

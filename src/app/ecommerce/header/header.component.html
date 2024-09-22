@@ -34,8 +34,8 @@
           @if(!log){
             <a routerLink="sign-in" class="link-opacity-50 link-opacity-100-hover link-dark">Sign-in </a>
             <a routerLink="register" class="link-opacity-50 link-opacity-100-hover link-dark ms-1">Register</a>
-          } @else {
-            <a (click)="signOut()"  class="link-opacity-50 link-opacity-100-hover link-dark ms-1">Sign-out</a>
+          } @else if(log){
+            <button (click)="signOut()"  class="btn link-opacity-50 link-opacity-100-hover link-dark ms-1">Sign-out</button>
           }
         </div>
       </div>
