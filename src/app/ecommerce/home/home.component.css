@@ -1,0 +1,34 @@
+div.outer{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url(../../../../public/patrick-hodskins-55PEl8GQ-zU-unsplash.jpg) rgba(0, 0, 0, 0.18) no-repeat;
+    background-blend-mode: darken;
+    background-size: cover;
+}
+div .content{
+    position: relative;
+    width: 50%;
+    top: 50%;
+    left:10%;
+    transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    color: #eee;
+}
+div p{
+    font-size: 4rem;
+}
+
+@media (max-width:991px) {
+    div .content{
+        width: 80%;
+    }
+    div p{
+        font-size: 3rem;
+    }
+}

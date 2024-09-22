@@ -1,0 +1,56 @@
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Contact Us</h2>
+    <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" novalidate>
+      <div class="form-group mb-3">
+        <label for="name">Name</label>
+        <input
+          type="text"
+          id="name"
+          formControlName="name"
+          class="form-control"
+          [ngClass]="{ 'is-invalid': name?.invalid && name?.touched }"
+          placeholder="Enter your name"
+        />
+        <div *ngIf="name?.invalid && name?.touched" class="invalid-feedback">
+          Name is required (minimum 3 characters).
+        </div>
+      </div>
+  
+      <div class="form-group mb-3">
+        <label for="email">Email</label>
+        <input
+          type="email"
+          id="email"
+          formControlName="email"
+          class="form-control"
+          [ngClass]="{ 'is-invalid': email?.invalid && email?.touched }"
+          placeholder="Enter your email"
+        />
+        <div *ngIf="email?.invalid && email?.touched" class="invalid-feedback">
+          Please enter a valid email.
+        </div>
+      </div>
+  
+      <div class="form-group mb-3">
+        <label for="message">Message</label>
+        <textarea
+          id="message"
+          formControlName="message"
+          class="form-control"
+          [ngClass]="{ 'is-invalid': message?.invalid && message?.touched }"
+          rows="5"
+          placeholder="Write your message here"
+        ></textarea>
+        <div *ngIf="message?.invalid && message?.touched" class="invalid-feedback">
+          Message is required (minimum 10 characters).
+        </div>
+      </div>
+  
+      <div class="d-grid gap-2">
+        <button type="submit" class="btn btn-primary my-3" [disabled]="contactForm.invalid">
+          Send Message
+        </button>
+      </div>
+    </form>
+  </div>
+  

@@ -1,0 +1,9 @@
+.logo img{
+    width: 40px;
+}
+nav{
+    z-index: 99;
+}
+a{
+    cursor: pointer;
+}
