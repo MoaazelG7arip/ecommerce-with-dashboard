@@ -3,13 +3,14 @@ import { ProductService } from '../../services/product.service';
 import { ProductModel } from '../../models/product';
 import { ProductDetailsComponent } from './product-details/product-details.component';
 import { UserService } from '../../services/user.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CartService } from '../../services/cart.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-products',
   standalone: true,
-  imports: [ProductDetailsComponent],
+  imports: [ProductDetailsComponent, FormsModule],
   templateUrl: './products.component.html',
   styleUrl: './products.component.css'
 })
@@ -22,9 +23,37 @@ export class ProductsComponent implements OnInit {
   userService: UserService = inject(UserService);
   cartService: CartService = inject(CartService);
   router: Router = inject(Router);
-
+  activeRoute: ActivatedRoute = inject(ActivatedRoute);
+  
+  filterVal = "all";
+  updatedProducts;
   ngOnInit(): void {
+    let data:string;
+    
     this.products = this.productService.getProducts();
+    this.activeRoute.queryParamMap.subscribe(query => {
+      data = query.get('search');
+      this.updateData(data);
+    })
+  }
+  updateData(data:string){
+    if(data == "" || data == null || data == undefined) {
+      this.products = this.productService.getProducts();
+      this.updatedProducts = this.products;
+    } else {
+      this.products = this.productService.getProducts()
+        .filter(product => product.productName.toLowerCase().includes(data.toLowerCase()));
+      this.updatedProducts = this.products;
+    }
+  }
+  applyFilter(){
+    if(this.filterVal == 'all'){
+      this.products = this.updatedProducts;
+    }else if(this.filterVal == 'true'){
+      this.products = this.updatedProducts.filter(product => product.stock > 0);
+    }else if(this.filterVal == 'false'){
+      this.products = this.updatedProducts.filter(product => product.stock <= 0);
+    }
   }
 
   goToDetails(product: ProductModel){

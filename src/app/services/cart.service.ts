@@ -53,7 +53,7 @@ export class CartService {
         checked = true;
         cart.product.push({
           productName: product.productName,
-          price: product.price
+          price: product.price - (product.discount * product.price)
         });
         localStorage.setItem('carts', JSON.stringify(this.carts));
         return;
@@ -64,7 +64,7 @@ export class CartService {
         email: email,
         product: [{
           productName: product.productName,
-          price: product.price
+          price: product.price - (product.discount * product.price)
         }]
       })
       localStorage.setItem('carts', JSON.stringify(this.carts));

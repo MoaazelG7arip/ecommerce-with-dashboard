@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, ElementRef, inject, ViewChild } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { UserService } from '../../services/user.service';
 
@@ -15,11 +15,11 @@ export class HeaderComponent {
   router:Router = inject(Router);
   log: boolean;
 
+
   ngOnInit(): void {
     this.userService.loggedIn.subscribe((data)=>{
       this.log = data;
     })
-    
     
   }
   
@@ -29,4 +29,11 @@ export class HeaderComponent {
     alert('Logged Out Successfully');
     this.router.navigate(['/ecommerce/home']);
   }
+
+  onSearch(value:string) {
+    // console.log(value);
+    this.router.navigate(['/ecommerce/products'], { queryParams: { search: value } });
+  }
+
+
 }

@@ -1,1 +1,42 @@
-<p>dashboard works!</p>
+<div class="container-fluid">
+    <div class=" row d-flex justify-content-around">
+        <div class="d-flex sidebar flex-column flex-shrink-0 p-3 bg-body-tertiary col-3" >
+            <a routerLink="dash-home" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+                <i class="fa-solid fa-gauge me-md-2 fs-3 text-center m-auto pt-5 pt-md-0 text-md-start"></i>
+                <span class="fs-4 d-none d-md-inline-block">Dashboard</span>
+            </a>
+            <hr>
+            <ul class="nav nav-pills nav-flush text-center text-md-start flex-column mb-auto">
+            <li class="nav-item">
+                <a [routerLink]="['dash-home']" routerLinkActive="active" class="nav-link link-body-emphasis" aria-current="page">
+                    <i class="fa-solid fa-house me-2"></i>
+                    <span class="d-none d-md-inline-block">Home</span>
+                </a>
+            </li>
+            <li>
+                <a [routerLink]="['orders']" routerLinkActive="active"  class="nav-link link-body-emphasis">
+                    <i class="fa-solid fa-calendar-days me-2"></i>
+                    <span class="d-none d-md-inline-block">Orders</span>
+                </a>
+            </li>
+            <li>
+                <a [routerLink]="['dash-products']" routerLinkActive="active" class="nav-link link-body-emphasis">
+                    <i class="fa-brands fa-product-hunt me-2"></i>
+                    <span class="d-none d-md-inline-block">Products</span>
+                </a>
+            </li>
+            <li>
+                <a [routerLink]="['customers']" routerLinkActive="active" class="nav-link link-body-emphasis">
+                    <i class="fa-solid fa-user me-2"></i>
+                    <span class="d-none d-md-inline-block">Customers</span>
+                </a>
+            </li>
+            </ul>
+        </div>
+        
+        <div class="col-8">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+
+</div>

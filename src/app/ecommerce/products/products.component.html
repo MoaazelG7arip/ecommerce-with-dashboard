@@ -1,32 +1,40 @@
 
 <div class="container mt-5">
+    <div class="filter p-4">
+        <input type="radio" name="stock" id="all" value="all" [(ngModel)]="filterVal" (change)="applyFilter()">
+        <label for="all">All</label>
+        <input type="radio" name="stock" id="in-stock" value="true" [(ngModel)]="filterVal" (change)="applyFilter()">
+        <label for="in-stock">In Stock</label>
+        <input type="radio" name="stock" id="not-in-stock" value="false" [(ngModel)]="filterVal" (change)="applyFilter()">
+        <label for="not-in-stock">Not In Stock</label>
+    </div>
     <div class="row justify-content-start">
         @for (product of products; track $index) {
-        <div class="col-md-6 col-lg-4">
-                <div class="card my-3 align-items-stretch">
-                    <img src="domino-studio-164_6wVEHfI-unsplash.jpg" class="card-img-top" alt="Shoe Image">
-                    @if(product.discount){
-                        <span class="text-bg-warning">{{product.discount *100}}%</span>
-                    }
-                    <div class="card-body">
-                        <h4 class="card-title">{{product.productName}}</h4>
-                        <h5 class="card-title">{{product.brand}}</h5>
-                        <p class="card-text text-secondary">{{product.description}}</p>
-                        @if (product.stock == 0) {
-                            <p class="card-text text-danger fw-bold">Not In Stock</p>
-                        } @else {
-                            <p class="card-text text-success fw-bold">In Stock</p>
+            <div class="col-md-6 col-lg-4">
+                    <div class="card my-3 align-items-stretch">
+                        <img src="domino-studio-164_6wVEHfI-unsplash.jpg" class="card-img-top" alt="Shoe Image">
+                        @if(product.discount){
+                            <span class="text-bg-warning">{{product.discount *100}}%</span>
                         }
-                        <div class="d-flex justify-content-between">
-                            @if(product.stock){
-                                <button class="btn btn-success" (click)="addToCart(product)">Add to Cart</button>
+                        <div class="card-body">
+                            <h4 class="card-title">{{product.productName}}</h4>
+                            <h5 class="card-title">{{product.brand}}</h5>
+                            <p class="card-text text-secondary">{{product.description}}</p>
+                            @if (product.stock == 0) {
+                                <p class="card-text text-danger fw-bold">Not In Stock</p>
                             } @else {
-                                <button class="btn btn-secondary" (click)="notifyMe(product)">Notify Me</button>
+                                <p class="card-text text-success fw-bold">In Stock</p>
                             }
-                            <button (click)="goToDetails(product)" class="btn btn-outline-secondary" type="button"  data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">View Details</button>
+                            <div class="d-flex justify-content-between">
+                                @if(product.stock){
+                                    <button class="btn btn-success" (click)="addToCart(product)">Add to Cart</button>
+                                } @else {
+                                    <button class="btn btn-secondary" (click)="notifyMe(product)">Notify Me</button>
+                                }
+                                <button (click)="goToDetails(product)" class="btn btn-outline-secondary" type="button"  data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">View Details</button>
+                            </div>
                         </div>
                     </div>
-                </div>
             </div>
         }
     </div>

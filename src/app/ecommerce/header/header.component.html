@@ -26,10 +26,10 @@
           </li>
 
         </ul>
-        <form class="d-flex" role="search">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-dark" type="submit">Search</button>
-        </form>
+        <div class="d-flex" role="search">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" #search (keyup.enter)="onSearch(search.value)">
+          <button class="btn btn-outline-dark" type="button" (click)="onSearch(search.value)">Search</button>
+        </div>
         <div class="mx-2 p-2 p-lg-0">
           @if(!log){
             <a routerLink="sign-in" class="link-opacity-50 link-opacity-100-hover link-dark">Sign-in </a>
