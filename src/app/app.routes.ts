@@ -12,8 +12,7 @@ import { DashProductsComponent } from './dashboard/dash-products/dash-products.c
 import { OrdersComponent } from './dashboard/orders/orders.component';
 import { CustomersComponent } from './dashboard/customers/customers.component';
 import { NotificationsComponent } from './dashboard/notifications/notifications.component';
-import { AddProductComponent } from './dashboard/dash-products/add-product/add-product.component';
-import { UpdateProductComponent } from './dashboard/dash-products/update-product/update-product.component';
+import { CanActivate, CanActivateChild } from './auth.guard';
 
 export const routes: Routes = [
     {path: '', redirectTo: 'ecommerce/home', pathMatch:"full"},
@@ -21,12 +20,13 @@ export const routes: Routes = [
         {path: '', redirectTo: 'home', pathMatch:"full"},
         {path: 'home', component: HomeComponent},
         {path: 'about', component:AboutComponent},
-        {path: 'contact-us', component:ContactUsComponent},
+        {path: 'contact-us', component:ContactUsComponent,canDeactivate:[(comp:ContactUsComponent)=> {return comp.canExit()}]},
         {path: 'products', component:ProductsComponent},
-        {path: 'sign-in', component: SignInComponent},
-        {path: 'register', component:RegisterComponent},
+        {path: 'sign-in', component: SignInComponent, canDeactivate:[(comp:SignInComponent)=> {return comp.canExit()}]},
+        {path: 'register', component:RegisterComponent, canDeactivate:[(comp:RegisterComponent)=> {return comp.canExit()}]},
     ]},
-    {path: 'dashboard', component: DashboardComponent, children:[
+    {path: 'dashboard', component: DashboardComponent, canActivate:[CanActivate], canActivateChild:[CanActivateChild],children:[
+        {path: '', redirectTo:'orders', pathMatch: 'full'},
         {path: 'messages', component: MessagesComponent},
         {path: 'dash-products', component: DashProductsComponent},
         {path: 'orders', component: OrdersComponent},

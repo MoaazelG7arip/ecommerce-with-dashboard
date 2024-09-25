@@ -90,6 +90,7 @@ export class UserService {
         return;
       }
     });
+    sessionStorage.setItem('admin-logged', 'true');
     return checked;
   }
 

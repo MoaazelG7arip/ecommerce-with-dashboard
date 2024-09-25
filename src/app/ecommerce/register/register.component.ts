@@ -49,4 +49,12 @@ export class RegisterComponent {
   get f() {
     return this.registerForm.controls;
   }
+  canExit(){
+    if (this.registerForm.dirty && !this.submitted){
+      let confirmation = confirm("Are you sure you want to exit?\nYou entered some information.");
+      return confirmation;
+    } else {
+      return true;
+    }
+  }
 }

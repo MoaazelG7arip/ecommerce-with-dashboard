@@ -56,4 +56,13 @@ export class SignInComponent {
     }
 
   }
+
+  canExit(){
+    if (this.loginForm.dirty && !this.submitted){
+      let confirmation = confirm("Are you sure you want to exit?\nYou entered some information.");
+      return confirmation;
+    } else {
+      return true;
+    }
+  }
 }

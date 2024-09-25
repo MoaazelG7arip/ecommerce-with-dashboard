@@ -84,7 +84,13 @@
         <label for="discount">Discount (%)</label>
         <input type="number" class="form-control" id="discount" formControlName="discount" placeholder="Enter discount">
         @if (productForm.get('discount').touched && productForm.get('discount').invalid) {
-          <small class="fw-bold text-danger">You should enter discount event it is 0</small>
+          @if(productForm.get('discount').errors?.['min']){
+            <small class="fw-bold text-danger">Discount should be at least 1</small>
+          } @else if(productForm.get('discount').errors?.['max']){
+            <small class="fw-bold text-danger">Discount Should be at most 100</small>
+          } @else {
+            <small class="fw-bold text-danger">You should enter discount even it is 0</small>
+          }
         }
       </div>
   

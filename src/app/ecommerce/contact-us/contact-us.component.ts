@@ -16,6 +16,7 @@ export class ContactUsComponent implements OnInit {
   contactUsService: ContactUsService = inject(ContactUsService);
 
   contactForm: FormGroup;
+  submitted = false;
 
   ngOnInit(): void {
     
@@ -28,8 +29,16 @@ export class ContactUsComponent implements OnInit {
   }
 
   onSubmit(){
+    this.submitted = true;
     this.contactUsService.addMessage(this.contactForm.value);
-    console.log(this.contactUsService.getMessages())
+  }
+  canExit(){
+    if (this.contactForm.dirty && !this.submitted){
+      let confirmation = confirm("Are you sure you want to exit?\nYou entered some information.");
+      return confirmation;
+    } else {
+      return true;
+    }
   }
 
 
