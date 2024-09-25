@@ -1,1 +1,24 @@
-<p>customers works!</p>
+<div class="container mt-4">
+    <div class="table-responsive">
+      <h3 class="p-3">Customer</h3>
+      <table class="table table-striped table-bordered table-dark">
+        <thead class="thead-dark">
+          <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+          </tr>
+        </thead>
+        <tbody>
+            @for (customer of customers; track $index) {
+                <tr>
+                  <td>{{ customer.firstName }}</td>
+                  <td>{{ customer.lastName }}</td>
+                  <td>{{ customer.email }}</td>
+                </tr>
+            }
+        </tbody>
+      </table>
+    </div>
+  </div>
+  

@@ -1,0 +1,23 @@
+<div class="container mt-4">
+  @for (notification of notifications; track $index) {
+    <div class="card mb-5">
+      <div class="card-header bg-primary text-white">
+        Notification
+      </div>
+        <div class="card-body">
+            <h5 class="card-title">User Email: {{notification.email}}</h5>
+            <p class="card-text">You have new notifications for the following products:</p>
+            <ul class="list-group">
+                @for (productName of notification.productName; track $index) {
+                    <li class="list-group-item">
+                        <div>
+                            <span>{{ productName }}</span>
+                        </div>
+                    </li>
+                }
+            </ul>
+        </div>
+      </div>
+    }
+  </div>
+  

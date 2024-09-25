@@ -1,0 +1,8 @@
+.close{
+    position: absolute;
+    right:20px;
+    top:20px;
+    color:red;
+    font-size: 1.5rem;
+    cursor: pointer;
+}

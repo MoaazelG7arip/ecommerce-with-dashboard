@@ -1,0 +1,94 @@
+<div class="container mt-4">
+    <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+      <span class="close" (click)="exit()">X</span>
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label for="productName">Product Name</label>
+          <input type="text" class="form-control" id="productName" formControlName="productName" placeholder="Enter product name">
+          @if (productForm.get('productName').touched && productForm.get('productName').invalid) {
+            <small class="fw-bold text-danger">You should enter product name</small>
+          }
+        </div>
+        
+        <div class="col-md-6 mb-3">
+          <label for="brand">Brand</label>
+          <input type="text" class="form-control" id="brand" formControlName="brand" placeholder="Enter brand">
+          @if (productForm.get('brand').touched && productForm.get('brand').invalid) {
+            <small class="fw-bold text-danger">You should enter brand name</small>
+          }
+        </div>
+      </div>
+  
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label for="price">Price</label>
+          <input type="number" class="form-control" id="price" formControlName="price" placeholder="Enter price">
+          @if (productForm.get('price').touched && productForm.get('price').invalid) {
+            <small class="fw-bold text-danger">You should enter price</small>
+          }
+        </div>
+  
+        <div class="col-md-6 mb-3">
+          <label for="stock">Stock</label>
+          <input type="number" class="form-control" id="stock" formControlName="stock" placeholder="Enter stock quantity">
+          @if (productForm.get('stock').touched && productForm.get('stock').invalid) {
+            <small class="fw-bold text-danger">You should enter number in stock</small>
+          }
+        </div>
+      </div>
+  
+      <div class="mb-3">
+        <label for="description">Description</label>
+        <textarea class="form-control" id="description" formControlName="description" placeholder="Enter description"></textarea>
+        @if (productForm.get('description').touched && productForm.get('description').invalid) {
+          <small class="fw-bold text-danger">You should enter description</small>
+        }
+      </div>
+  
+      <div class="row">
+        <div class="col-md-6 mb-3" formArrayName="size">
+          <label>size</label>
+          <div *ngFor="let size1 of size.controls; let i = index" class="input-group mb-2">
+            <input type="text" class="form-control" [formControlName]="i" placeholder="Enter size">
+            
+            @if (size.length > 1 && i >= 1) {
+                <div class="input-group-append">
+                    <button type="button" class="btn btn-danger" (click)="removeSize(i)">Remove</button>
+                </div>
+            }
+          </div>
+          @if (productForm.get('size').touched && productForm.get('size').invalid) {
+            <small class="fw-bold text-danger">You should enter size</small>
+          }
+          <button type="button" class="btn btn-primary" (click)="addSize()">Add Size</button>
+        </div>
+  
+        <div class="col-md-6 mb-3" formArrayName="color">
+          <label>color</label>
+          <div *ngFor="let color1 of color.controls; let i = index" class="input-group mb-2">
+            <input type="color" class="form-control" [formControlName]="i" placeholder="Enter color">
+            @if (color.length > 1 && i >= 1) {
+                <div class="input-group-append">
+                    <button type="button" class="btn btn-danger" (click)="removeColor(i)">Remove</button>
+                </div>
+            }
+          </div>
+          @if (productForm.get('color').touched && productForm.get('color').invalid) {
+            <small class="fw-bold text-danger">You should enter color</small>
+          }
+          <button type="button" class="btn btn-primary" (click)="addColor()">Add Color</button>
+        </div>
+      </div>
+  
+      <div class="mb-3">
+        <label for="discount">Discount (%)</label>
+        <input type="number" class="form-control" id="discount" formControlName="discount" placeholder="Enter discount">
+        @if (productForm.get('discount').touched && productForm.get('discount').invalid) {
+          <small class="fw-bold text-danger">You should enter discount event it is 0</small>
+        }
+      </div>
+  
+      <button type="submit" class="btn btn-success" [disabled]="productForm.invalid">Submit</button>
+    </form>
+</div>
+  

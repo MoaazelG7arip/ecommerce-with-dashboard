@@ -41,8 +41,19 @@ export class UserService {
   }
 
   addUser(user: UserModel) {
-    this.users.push(user);
-    localStorage.setItem('users', JSON.stringify(this.users));
+    let checked:boolean;
+    this.users.forEach(user1 => {
+      if(user.email == user1.email){
+        checked = true;
+        return;
+      };
+    });
+    if(checked){
+      alert('User already exists');
+    } else if (!checked){
+      this.users.push(user);
+      localStorage.setItem('users', JSON.stringify(this.users));
+    }
     this.loggedIn.next(true);
     this.loggedIn.subscribe((value)=>{
       localStorage.setItem('loggedIn', JSON.stringify(value));

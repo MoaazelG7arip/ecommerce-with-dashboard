@@ -8,8 +8,8 @@ import { CartModel } from '../models/cart';
 })
 export class CartService {
 
-  notifications: NotificationsModel[];
-  carts: CartModel[];
+  private notifications: NotificationsModel[];
+  private carts: CartModel[];
 
   constructor() {
     let storageNotifications = localStorage.getItem('notifications');
@@ -46,6 +46,10 @@ export class CartService {
     }
   }
 
+  getNotifications(){
+    return this.notifications;
+  }
+
   addToCart(product: ProductModel, email: string){
     let checked;
     this.carts.forEach(cart => {
@@ -69,5 +73,8 @@ export class CartService {
       })
       localStorage.setItem('carts', JSON.stringify(this.carts));
     }
+  }
+  getCarts(){
+    return this.carts;
   }
 }

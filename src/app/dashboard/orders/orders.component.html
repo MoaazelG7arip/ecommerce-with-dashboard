@@ -1,1 +1,32 @@
-<p>orders works!</p>
+<div class="container mt-4">
+    @for (order of orders; track $index) {
+        <div class="card mb-3">
+            <div class="card-header">
+                <h5>Email: {{ order.email }}</h5>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Product Name</th>
+                                <th>Price (USD)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @for (product of order.product; track $index) {
+                                <tr >
+                                    <td>{{ product.productName }}</td>
+                                    <td>{{ product.price | currency: 'USD' }}</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                    <div>
+                        <p>Total Price : ${{TotalPrice[$index]}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }   
+</div>

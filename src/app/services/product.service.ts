@@ -130,6 +130,31 @@ export class ProductService {
     }
    }
 
+
+   addproduct(product){
+    product.id = this.products[this.products.length-1].id + 1;
+    this.products.push(product);
+    localStorage.setItem('products', JSON.stringify(this.products));
+   }
+   updateproduct(updatedproduct,id){
+    console.log(updatedproduct)
+    const index = this.products.findIndex(product => product.id == id);
+    console.log(index);
+    if (index !== -1) {
+      this.products[index] = updatedproduct;
+      this.products[index].id = id;
+    } 
+    console.log(this.products)
+    localStorage.setItem('products', JSON.stringify(this.products));
+  }
+   deleteProduct(id){
+    const index = this.products.findIndex(product => product.id == id);
+    if (index!== -1) {
+      this.products.splice(index, 1);
+    }
+    localStorage.setItem('products', JSON.stringify(this.products));
+   }
+
   getProducts(){
     return this.products;
   }

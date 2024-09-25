@@ -19,15 +19,7 @@
                 <span [style]="{'background-color': color}" class="colors"></span>
             }
         </div>
-        <div class="my-3">Size : 
-            @for (size of currentProduct?.size; track $index) {
-                @if(currentProduct?.size.length != ($index + 1)){
-                    <span class="fw-bold text-secondary-emphasis">{{size}} - </span>
-                } @else {
-                    <span class="fw-bold text-secondary-emphasis">{{size}}</span>
-                }
-            }
-        </div>
+        <div class="my-3">Size : {{currentProduct?.size.join(' - ')}}</div>
         <p>
             @if (currentProduct?.stock) {
                 <span class="fw-bold text-bg-primary p-2 rounded-1">{{currentProduct?.stock}}</span> Piece Is Available

@@ -1,0 +1,15 @@
+table tbody tr td{
+  color: #fff !important;;
+}
+table tbody tr,td{
+  border-color: #495057;
+}
+table tbody tr:nth-child(4n+3) td,
+table tbody tr:nth-child(4n+4) td{
+  background-color: #212529 !important; 
+}
+
+table tbody tr:nth-child(4n+1) td,
+table tbody tr:nth-child(4n+2) td{
+  background-color: #343a40 !important;
+}

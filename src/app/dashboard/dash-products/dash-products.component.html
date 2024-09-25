@@ -1,1 +1,53 @@
-<p>dash-products works!</p>
+<div class="container mt-5">
+    <h2 class="text-start mb-4">Products</h2>
+    <div class="table-responsive">
+      <table class="table table-bordered table-dark table-striped">
+        <thead class="thead-dark">
+          <tr>
+            <th>Product Name</th>
+            <th>Brand</th>
+            <th>Sizes</th>
+            <th>Colors</th>
+            <th>Price ($)</th>
+            <th>Stock</th>
+            <th>Discount (%)</th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (product of products; track $index) {
+            <tr>
+                <td>{{ product.productName }}</td>
+                <td>{{ product.brand }}</td>
+                <td>{{ product.size.join(', ') }}</td>
+                <td>{{ product.color.join(', ') }}</td>
+                <td>{{ product.price }}</td>
+                <td>{{ product.stock }}</td>
+                <td>{{ product.discount * 100}}</td>
+                <td><i class="fa-solid fa-square-pen" style="color: #FFD43B;" (click)="updateProduct(product)"></i></td>
+                <td><i class="fa-solid fa-trash" style="color: #f14309;" (click)="deleteProduct(product)"></i></td>
+            </tr>
+          }
+        </tbody>
+      </table>
+      <button class="btn btn-success mb-4" (click)="addProduct()">Add product</button>
+    </div>
+  </div>
+  
+  @switch (routeVal) {
+    @case ('addproduct') {
+      <div class="changes">
+        <div>
+          <app-add-product (emit)="returnToMain()"></app-add-product>
+        </div>
+      </div>
+    }
+    @case ('updateproduct') {
+      <div class="changes">
+        <div>
+          <app-update-product [productInput]="productUpdate"(emit)="returnToMain()"></app-update-product>
+        </div>
+      </div>
+    }
+  }

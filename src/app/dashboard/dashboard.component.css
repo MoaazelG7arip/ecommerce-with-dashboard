@@ -1,3 +1,12 @@
 .sidebar{
     height: 100vh;
 }
+/* .dash-body{
+    max-height: 100vh;
+    overflow-y: auto;
+} */
+.side{
+    top: 0;
+    left: 0;
+    height: 100%;
+}

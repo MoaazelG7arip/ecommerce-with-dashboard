@@ -1,1 +1,31 @@
-<p>messages works!</p>
+<div class="mt-3">
+    <div class="row">
+      <div class="col-12">
+        <h4 class="text-start p-3">Messages</h4>
+      </div>
+    </div>
+    <div class="row justify-content-start">
+      <div class="col-12 col-md-10">
+        <table class="table table-bordered">
+          <thead class="table-dark">
+            <tr class="text-center">
+              <th>Email Address</th>
+              <th>Name</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (msg of messages; track $index) {
+                <tr>
+                  <td>{{ msg.email }}</td>
+                  <td>{{ msg.name }}</td>
+                </tr>
+                <tr>
+                    <td colspan="2">Message : {{ msg.message }}</td>
+                </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  

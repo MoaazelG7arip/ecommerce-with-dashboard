@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { UserModel } from '../../models/user';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-customers',
@@ -9,4 +11,13 @@ import { Component } from '@angular/core';
 })
 export class CustomersComponent {
 
+  userService: UserService = inject(UserService);
+
+  customers: UserModel[];
+
+  ngOnInit(): void {
+    
+    this.customers = this.userService.getUser();
+    
+  }
 }
